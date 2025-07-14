@@ -9,12 +9,15 @@ import Search from "../components/Search";
 import Picture from "../components/Picture";
 
 const Homepage = () => {
+  let [input, setInput] = useState("");
   let [data, setData] = useState(null);
   const auth = "GtFKyr0gSQIZxSnr6JZazn5blo5UiQP49hE6xwgS1daE6TaTbPFir4aa";
   const initialURL = "https://api.pexels.com/v1/curated?per_page=1&per_page=15";
 
-  const search = async () => {
-    let result = await axios.get(initialURL, {
+  let searchURL = `https://api.pexels.com/v1/search?query=${input}&per_page=15&page=1`;
+
+  const search = async (url) => {
+    let result = await axios.get(url, {
       headers: { Authorization: auth },
     });
     setData(result.data.photos);
@@ -22,8 +25,13 @@ const Homepage = () => {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <Search search={search} />
-      <div className="pictures">
+      <Search
+        search={() => {
+          search(searchURL);
+        }}
+        setInput={setInput}
+      />
+      <div className="morePicture">
         {data &&
           data.map((d) => {
             return <Picture data={d} />;
