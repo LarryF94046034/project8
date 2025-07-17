@@ -12,6 +12,7 @@ import Page404 from "./pages/Page404";
 
 //css
 import "./styles/style.css";
+
 import axios from "axios";
 
 function App() {

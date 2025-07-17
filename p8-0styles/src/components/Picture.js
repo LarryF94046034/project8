@@ -2,7 +2,7 @@ import React from "react";
 
 const Picture = ({ data }) => {
   return (
-    <div className="Picture">
+    <div className="picture">
       <p>{data.photographer}</p>
       <div className="imageContainer">
         <img src={data.src.large} alt="" />
